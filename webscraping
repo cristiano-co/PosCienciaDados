@@ -1,0 +1,19 @@
+def download_csv_file(url, arquivo):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(arquivo, 'wb') as file:
+            file.write(response.content)
+        print("Arquivo baixado com sucesso.")
+    else:
+        print("Falha ao baixar o arquivo.")
+
+# Definindo o ano e trimestre desejados
+anos = [2020, 2021]
+trimestres = ['01', '02', '03']
+
+# Gerando as URLs e baixando os arquivos
+for ano in anos:
+    for trimestre in trimestres:
+        url = f"https://dados.anvisa.gov.br/dados/SNGPC/Manipulados/EDA_Manipulados_{ano}{trimestre}.csv"
+        nome_arquivo = f"EDA_Manipulados_{ano}{trimestre}.csv"
+        download_csv_file(url, nome_arquivo)
